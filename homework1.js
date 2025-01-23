@@ -1,44 +1,44 @@
-// Tento kód převádí číslo z dvojkové číselné soustavy (základ 2) do desítkové soustavy (základ 10).
-// Obsahuje funkci `convertBinaryToDecimal`, která jako vstup bere binární číslo ve formě řetězce
-// a vrací ekvivalentní číslo v desítkové soustavě.
+// This code converts a number from the binary numeral system (base 2) to the decimal system (base 10).
+// It contains the `convertBinaryToDecimal` function, which takes a binary number as a string input
+// and returns the equivalent number in the decimal system.
 
 function convertBinaryToDecimal(binaryString) {
-    // Inicializace proměnných pro výpočet
-    let decimalValue = 0; // Uloží výslednou desítkovou hodnotu
-    let power = 0; // Udržuje informaci o aktuální mocnině čísla 2
+    // Initialize variables for the calculation
+    let decimalValue = 0; // Stores the resulting decimal value
+    let power = 0; // Tracks the current power of 2
 
-    // Projdeme binární číslo zprava doleva (nejnižší významová číslice)
+    // Traverse the binary number from right to left (least significant digit first)
     for (let i = binaryString.length - 1; i >= 0; i--) {
-        // Získáme aktuální číslici jako číslo
+        // Get the current digit as a number
         let digit = parseInt(binaryString[i], 10);
 
-        // Pokud číslice není 0 nebo 1, hodíme chybu (binární čísla obsahují pouze tyto číslice)
+        // If the digit is not 0 or 1, throw an error (binary numbers only contain these digits)
         if (digit !== 0 && digit !== 1) {
-            throw new Error("Neplatný znak v binárním čísle.");
+            throw new Error("Invalid character in binary number.");
         }
 
-        // Přidáme k desítkové hodnotě příspěvek aktuální číslice vynásobený odpovídající mocninou 2
+        // Add the contribution of the current digit, multiplied by the corresponding power of 2, to the decimal value
         decimalValue += digit * Math.pow(2, power);
 
-        // Posuneme mocninu pro další číslici
+        // Move to the next power of 2 for the next digit
         power++;
     }
 
-    // Vrátíme výslednou hodnotu
+    // Return the resulting decimal value
     return decimalValue;
 }
 
-// Příklad použití
+// Example usage
 try {
-    // Testovací binární číslo
-    const binaryInput = "1001"; // 1101 v binární soustavě odpovídá 13 v desítkové
+    // Test binary number
+    const binaryInput = "1001"; // 1001 in binary corresponds to 9 in decimal
 
-    // Výpočet
+    // Perform the conversion
     const decimalOutput = convertBinaryToDecimal(binaryInput);
 
-    // Výpis do konzole
-    console.log(`Binární číslo: ${binaryInput} -> Desítkové číslo: ${decimalOutput}`);
+    // Output to the console
+    console.log(`Binary number: ${binaryInput} -> Decimal number: ${decimalOutput}`);
 } catch (error) {
-    // Zpracování chyb
-    console.error(`Došlo k chybě: ${error.message}`);
+    // Handle errors
+    console.error(`An error occurred: ${error.message}`);
 }
